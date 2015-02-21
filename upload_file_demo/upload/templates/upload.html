@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<link rel='stylesheet' href='/static/css/style.css'>
+		<script src='/static/js/jquery.js'></script> 
+		<script src='/static/js/ajaxfileupload.js'></script>
+		    <script type="text/javascript">
+    $(function(){
+       //上传图片
+       $("#btnUpload").click(function() {
+      // alert('asd');
+             ajaxFileUpload();
+       });
+    });
+    function ajaxFileUpload() {
+        // 开始上传文件时显示一个图片
+       
+        var elementIds=["flag"]; //flag为id、name属性名
+        $.ajaxFileUpload({
+            url: '/upload/', 
+            type: 'post',
+            secureuri: false, //一般设置为false
+            fileElementId: 'file', // 上传文件的id、name属性名
+            dataType: 'text', //返回值类型，一般设置为json、application/json
+            elementIds: elementIds, //传递参数到服务器
+            success: function(data, status){  
+                alert(data);
+            },
+            error: function(data, status, e){ 
+                alert(e);
+            }
+        });
+        return '1';
+        //return false;
+    }
+    </script>
+	</head>
+	<body>
+		<input type='file' name='file' id='file'>
+		<input type="hidden" id="flag" name="flag" value="ajax文件上传"/>
+		<button type='button' id='btnUpload'> upload</button>
+	</body>
+</html>
